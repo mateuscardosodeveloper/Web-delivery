@@ -6,7 +6,7 @@ from delivery.ext.auth.controller import list_image
 page = Blueprint("page", __name__)
 
 
-@page.route('/uploads/image<file>')
+@page.route('/uploads/<file>')
 def upload_file(file):
     return send_from_directory(app.config['UPLOAD_FOLDER_SEARCH'], file)
 

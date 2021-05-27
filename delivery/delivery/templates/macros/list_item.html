@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-image">
             <figure class="image is-4by3">
-                <img src="{{url_for('page.upload_file', file=item.id)}}" alt="Placeholder image">
+                <img src="{{url_for('page.upload_file', file=item.id).join(['', '.jpg'])}}" alt="Placeholder image">
             </figure>
         </div>
         <div class="card-content">
@@ -17,14 +17,6 @@
                     <p class="subtitle is-5"><strong>R$</strong> {{item.price}}</p>
                 </div>
             </div>
-
-            <!--             <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                <a href="#">#css</a> <a href="#">#responsive</a>
-                <br>
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-            </div> -->
         </div>
     </div>
 </div>

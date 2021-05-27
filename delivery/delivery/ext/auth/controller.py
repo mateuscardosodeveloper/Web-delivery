@@ -86,10 +86,11 @@ def create_store(name_store: str, user_id: int, category_id: str, active: bool) 
     return store
 
 
-def create_item(name: str, price: float, store_id: str, available: bool = True) -> Items:
+def create_item(name: str, price: float, description: str, store_id: str, available: bool = True) -> Items:
     items = Items(
         name=name,
         price=price,
+        description=description,
         store_id=store_id,
         available=available,
     )
@@ -126,7 +127,7 @@ def create_order(created_at: str, completed: bool, user_id: str, store_id: str) 
 
 def list_image(id):
     for name_image in os.listdir(app.config["UPLOAD_FOLDER"]):
-        if f'{id}' in name_image:
+        if f'{id}.jpg' in name_image:
             return name_image
 
 

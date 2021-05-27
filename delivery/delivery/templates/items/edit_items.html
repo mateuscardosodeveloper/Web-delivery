@@ -53,7 +53,7 @@
                         </span>
                     </p>
                     <p class="control is-expanded">
-                        {{ form.price(class="input", type="number", placeholder="Valor") }}
+                        {{ form.price(class="input", type="number", step=".01", placeholder="Valor") }}
                         {% if form.errors.price %}
                     <div class="alert alert-danger" role="alert">
                         <ul>
@@ -65,6 +65,20 @@
                     {% endif %}
                     </p>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>Descrição</label>
+                {{ form.description(class="textarea", placeholder="Descrição") }}
+                {% if form.errors.description %}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        {% for e in form.errors.description %}
+                        <li>{{ e }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
             </div>
 
             <div class="form-group">

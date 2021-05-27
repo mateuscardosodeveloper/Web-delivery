@@ -10,11 +10,6 @@ from delivery.ext.auth.controller import create_user, save_user_picture
 main = Blueprint("main", __name__)
 
 
-@main.route('/upload')
-def upload():
-    return render_template('upload.html')
-
-
 @main.before_request
 def before_request():
     if current_user.is_authenticated:
@@ -72,6 +67,10 @@ def logout():
     logout_user()
     return redirect(url_for("main.login"))
 
+@main.route('/foods')
+def foods():
+
+    return render_template('order/foods.html')
 
 @main.route("/restaurantes")
 def restaurants():

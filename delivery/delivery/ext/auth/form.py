@@ -50,8 +50,9 @@ class StoreEditForm(FlaskForm):
 
 class ItemsForm(FlaskForm):
     name = wtf.StringField("Nome", [wtf.validators.DataRequired()])
-    image = FileField("Image")
+    image = wtf.FileField("Image", [wtf.validators.DataRequired()])
     price = wtf.FloatField("Preço", [wtf.validators.DataRequired()])
+    description = wtf.TextAreaField ("Descrição", [wtf.validators.DataRequired()])
     store_id = QuerySelectField(
         'ID da loja', query_factory=lambda: Store.query.all())
     available = wtf.BooleanField("Disponivel", default=True)
@@ -61,6 +62,7 @@ class ItemsEditForm(FlaskForm):
     name = wtf.StringField("Nome", [wtf.validators.DataRequired()])
     image = FileField("Image")
     price = wtf.FloatField("Preço", [wtf.validators.DataRequired()])
+    description = wtf.TextAreaField("Descrição", [wtf.validators.DataRequired()])
     store_id = QuerySelectField('ID da loja', query_factory=lambda: Store.query.all(
     ), allow_blank=True, blank_text='Selecione uma loja')
     available = wtf.BooleanField("Disponivel")

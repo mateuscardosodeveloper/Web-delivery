@@ -20,11 +20,6 @@ def page():
     return render_template('login.html')
 
 
-@category.route('/upload/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER_SEARCH2'], filename)
-
-
 @category.route('/lista_categoria', methods=['GET', 'POST'])
 @login_required
 def list_category():
@@ -178,6 +173,7 @@ def edit_items(id):
     if form.validate_on_submit():
         items.name = form.name.data
         items.price = form.price.data
+        items.description = form.description.data
         if form.store_id.data == None:
             pass
         else:
@@ -189,7 +185,7 @@ def edit_items(id):
             upload_folder = os.path.join(app.config["UPLOAD_FOLDER"])
             secure_filename(upload_folder)
             delete_image(id)
-            image.save(f'{upload_folder}/{items.id}')
+            image.save(f'{upload_folder}/{items.id}.jpg')
             db.session.add(items)
             db.session.commit()
             flash('Item editado com sucesso', 'success')
@@ -201,6 +197,7 @@ def edit_items(id):
 
     form.name.data = items.name
     form.price.data = items.price
+    form.description.data = items.description
     form.store_id.data = items.store_id
     form.available.data = items.available
     return render_template('items/edit_items.html', items=items, form=form, capa_item=nome_arquivo)
@@ -223,23 +220,24 @@ def register_items():
     form = ItemsForm()
 
     if form.validate_on_submit():
-        try:
-            items = create_item(
-                name=form.name.data,
-                price=form.price.data,
-                store_id=form.store_id.data.name_store,
-                available=form.available.data,
-            )
-            image = request.files['image']
-            upload_folder = os.path.join(app.config["UPLOAD_FOLDER"])
-            secure_filename(upload_folder)
-            image.save(f'{upload_folder}/{items.id}')
+        #try:
+        items = create_item(
+            name=form.name.data,
+            price=form.price.data,
+            description=form.description.data,
+            store_id=form.store_id.data.name_store,
+            available=form.available.data,
+        )
+        image = request.files['image']
+        upload_folder = os.path.join(app.config["UPLOAD_FOLDER"])
+        secure_filename(upload_folder)
+        image.save(f'{upload_folder}/{items.id}.jpg')
 
-            flash('Item registrado com sucesso!', 'success')
-            return redirect(url_for('.register_items'))
-        except Exception:
-            flash('Houve algum erro ao cadastrar o item!', 'danger')
-            return redirect(url_for('.register_items'))
+        flash('Item registrado com sucesso!', 'success')
+        return redirect(url_for('.register_items'))
+        #except Exception:
+            #flash('Houve algum erro ao cadastrar o item!', 'danger')
+            #return redirect(url_for('.register_items'))
 
     return render_template("items/register_items.html", form=form)
 

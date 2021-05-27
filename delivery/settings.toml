@@ -11,7 +11,6 @@ EXTENSIONS = [
 ]
 UPLOAD_FOLDER = "uploads"
 UPLOAD_FOLDER_SEARCH = "../uploads"
-UPLOAD_FOLDER_SEARCH2 = "../upload"
 
 
 

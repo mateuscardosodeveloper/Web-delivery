@@ -101,9 +101,18 @@
         {% endif %}
       </div>
 
-      {% if not current_user.is_authenticated %}
       <div class="navbar-end">
         <div class="navbar-item">
+          <a class="button is-dark" href="{{url_for('main.foods')}}">
+            <span class="icon-text">
+              <i class="fas fa-utensils"></i>
+              <strong>CART</strong>
+            </span>
+          </a>
+        </div>
+
+        {% if not current_user.is_authenticated %}
+        <class class="navbar-end">
           <div class="buttons">
             <a class="button is-primary" href="{{url_for('main.signup')}}">
               <strong>Sign up</strong>
@@ -112,12 +121,11 @@
               Log in
             </a>
           </div>
-        </div>
-      </div>
-      {% endif %}
+        </class>
+        {% endif %}
 
-      {% if current_user.is_authenticated %}
-      <div class="navbar-end">
+        {% if current_user.is_authenticated %}
+
         <div class="navbar-item">
           <div class="buttons">
             <a class="button is-light" href="{{url_for('main.logout')}}">

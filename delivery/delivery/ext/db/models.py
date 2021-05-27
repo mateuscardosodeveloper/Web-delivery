@@ -64,7 +64,8 @@ class Items(db.Model):
     id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.Unicode)
     image = db.Column("image", db.Unicode)
-    price = db.Column("price", db.Float(precision=2))
+    price = db.Column("price", db.Float(asdecimal=True, decimal_return_scale=2))
+    description = db.Column("description", db.Text(length=None))
     store_id = db.Column("store_id", db.Integer, db.ForeignKey("store.name_store"))
     available = db.Column("available", db.Boolean)
     
