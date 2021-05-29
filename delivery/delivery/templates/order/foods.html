@@ -1,2 +1,75 @@
 {% extends "index.html" %}
 
+{% block top %}
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <p class="subtitle is-5">Descrição da refeição</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block main %}
+<a href="{{ url_for('page.index')}}">
+    <button class="button is-write">Voltar</button>
+</a>
+
+</br>
+</br>
+
+<div class="columns">
+    <div class="column is-half">
+        <figure class="image is-4by3">
+            <img src="{{url_for('page.upload_file', file=capa_item)}}">
+        </figure>
+
+    </div>
+
+    <div class="column column is-one-quarter">
+        <p class="title is-5">{{items.name}}</p>
+        <div class="card">
+        </div>
+        </br>
+        <p class="subtitle is-5"><strong>Valor: </strong> {{items.price}}</p>
+        </br>
+        <div class="card">
+        </div>
+        <strong>Descrição:</strong></br></br>
+        {{items.description}}
+    </div>
+
+    <div class="column is-one-quarter">
+        <div class="card" style="width: 15rem;">
+            <div class="card-body">
+                Valor: 
+                <span style="text-align: right; width:60%;  display: inline-block;">{{items.price}}</span>
+            </div>
+        </div>
+
+        <div class="card" style="width: 15rem;">
+            <div class="card-body">
+                <div class="content">
+                    Status:
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="width: 15rem;">
+            <div class="card-body">
+                Quantidade:
+            </div>
+        </div>
+
+        <div class="card" style="width: 15rem;">
+            <div class="card-body">
+                <a class="card text-center" href="">
+                    <button class="button is-dark"> Adicionar ao carrinho</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<strong class="subtitle is-4">Comentarios</strong>
+{% endblock %}
