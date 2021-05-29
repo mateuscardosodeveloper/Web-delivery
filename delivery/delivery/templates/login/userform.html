@@ -16,7 +16,6 @@
 <form action='{{url_for("main.signup")}}' method='post' enctype='multipart/form-data'>
     <div class="columns is-multiline is-mobile">
         <div class="column is-one-quarter">
-
             {{form.csrf_token}}
 
             <div class="field">
@@ -41,7 +40,6 @@
                 </div>
             </div>
 
-
             <div class="field">
                 <label class="label">Senha</label>
                 <div class="control">
@@ -49,22 +47,24 @@
                 </div>
             </div>
 
-
-
-            <div class="control">
-                <input class="btn btn-info" type="submit" value="Cadastrar">
-            </div>
+            <input class="btn btn-info" type="submit" value="Cadastrar">
         </div>
+
         <div class="column is-one-quarter">
-        <figure class="thumb col-md-8">
-            <img src="{{url_for('page.upload_file', file='capa_padrao.jpg')}}" alt="">
-            <figcaption>
-                <label class="fileContainer">
-                    Escolha uma foto!
-                    {{form.foto(class="btn btn-link")}}
-                </label>
-            </figcaption>
-        </figure>
+            <figure class="thumb col-md-8">
+                <img src="{{url_for('page.upload_file', file='capa_padrao.jpg')}}" alt="">
+                {{form.foto(class="button is-white")}}
+                <figcaption>
+                    <label class="fileContainer">
+                    </label>
+                </figcaption>
+            </figure>
+        </div>
+
     </div>
 </form>
+
+<a href="{{ url_for('page.index') }}">
+    <button class="button is-link is-light">Voltar</button>
+</a>
 {% endblock %}

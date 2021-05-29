@@ -1,6 +1,6 @@
 {% macro cards(items) %}
 {% for item in items %}
-<div class="column">
+<div class="column is-one-quarter">
     <div class="card">
         <div class="card-image">
             <figure class="image is-4by3">
@@ -10,11 +10,11 @@
         <div class="card-content">
             <div class="media">
                 <div class="media-left">
-                </div>
-                <div class="media-content">
-                    <p class="title is-4">{{item.name}}</p>
-                    <p class="title is-4">{{item.store_id}}</p>
-                    <p class="subtitle is-5"><strong>R$</strong> {{item.price}}</p>
+                    <div class="media-content">
+                        <p class="title is-4">{{item.name}}</p>
+                        <p class="title is-4">{{item.store_id}}</p>
+                        <p class="subtitle is-5"><strong>R$</strong> {{item.price}}</p>
+                    </div>
                 </div>
             </div>
         </div>

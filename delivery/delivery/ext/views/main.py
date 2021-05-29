@@ -1,10 +1,11 @@
 from flask import Blueprint, current_app, render_template, redirect, request, url_for, flash, send_from_directory
 from flask_login import current_user, login_required, login_user
 from flask_login.utils import login_required, logout_user
+
 from delivery.ext.db import db
-from delivery.ext.db.models import User
+from delivery.ext.db.models import User, Items
 from delivery.ext.auth.form import UserForm, LoginForm
-from delivery.ext.auth.controller import create_user, save_user_picture
+from delivery.ext.auth.controller import create_user, save_user_picture, list_image
 
 
 main = Blueprint("main", __name__)
@@ -67,10 +68,12 @@ def logout():
     logout_user()
     return redirect(url_for("main.login"))
 
-@main.route('/foods')
-def foods():
+@main.route('/foods/<id>', methods=['GET', ])
+def foods(id):
+    items = Items.query.filter_by(id=id).first()
+    nome_arquivo = list_image(id)
 
-    return render_template('order/foods.html')
+    return render_template('order/foods.html', items=items, capa_item=nome_arquivo)
 
 @main.route("/restaurantes")
 def restaurants():

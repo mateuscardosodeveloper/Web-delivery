@@ -16,8 +16,6 @@
 <form action='{{url_for("cate.register_items")}}' method='post' enctype='multipart/form-data'>
     <div class="columns is-multiline is-mobile">
         <div class="column is-one-quarter">
-
-
             {{form.csrf_token}}
 
             <div class="form-group">
@@ -38,8 +36,6 @@
                 </div>
                 {% endif %}
             </div>
-
-
 
             <div class="form-group">
                 <label>Valor</label>
@@ -95,31 +91,26 @@
                 {% endif %}
             </div>
 
+            <input class="btn btn-primary" type="submit" value="Cadastrar">
+        </div>
 
+        <div class="column is-one-quarter">
             <div class="form-group">
-                <input class="button is-link" type="submit" value="Cadastrar">
+                <figure class="thumb col-md-9">
+                    <img class="img-responsive" src="{{url_for('page.upload_file', file='capa_padrao.jpg')}}">
+                    {{form.image(class='button is-white')}}
+                    <figcaption>
+                        <label class="fileContainer">
+                        </label>
+                    </figcaption>
+                </figure>
             </div>
+        </div>
 
-
-
+    </div>
 </form>
 
-<button class="button is-link is-light"><a href="{{ url_for('cate.list_items')}}">Voltar</a></button>
-
-</div>
-
-<div class="column is-one-quarter">
-    <div class="form-group">
-        <figure class="thumb col-md-9">
-            <img class="img-responsive" src="{{url_for('page.upload_file', file='capa_padrao.jpg')}}">
-            {{form.image(class='button is-white')}}
-            <figcaption>
-                <label class="fileContainer">
-                </label>
-            </figcaption>
-        </figure>
-    </div>
-</div>
-
-</div>
+<a href="{{ url_for('cate.list_items')}}">
+    <button class="button is-link is-light">Voltar</button>
+</a>
 {% endblock %}

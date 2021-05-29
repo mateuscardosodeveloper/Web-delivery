@@ -51,7 +51,9 @@
 </div>
 </form>
 <div class="col-md-3 col-md-offset-4">
-    <button class="button is-link is-light"><a href="{{ url_for('cate.list_order_items')}}">Voltar</a></button>
+    <a href="{{ url_for('cate.list_order_items')}}">
+        <button class="button is-link is-light">Voltar</button>
+    </a>
 </div>
 {% endblock %}
 

@@ -1,14 +1,20 @@
 import os
-from flask import Blueprint, render_template, redirect, url_for, flash, request, send_from_directory
+from datetime import datetime
+
+from flask import Blueprint, render_template, redirect, url_for, \
+    flash, request, send_from_directory
 from flask import current_app as app
 from flask_login import login_required, current_user
-from delivery.ext.auth.form import CategoryForm, CategoryEditForm, ItemsForm, ItemsEditForm, StoresForm, StoreEditForm, AddressForm,\
+
+from delivery.ext.auth.form import CategoryForm, CategoryEditForm, \
+    ItemsForm, ItemsEditForm, StoresForm, StoreEditForm, AddressForm,\
     AddressEditForm, OrderForm, OrderEditForm, OrderItemsForm
-from delivery.ext.auth.controller import create_category, create_item, create_store, create_address, create_order, save_user_picture, list_image, delete_image
-from datetime import datetime
+from delivery.ext.auth.controller import create_category, create_item,\
+    create_store, create_address, create_order, save_user_picture, list_image, delete_image
 from delivery.ext.db import db
 from delivery.ext.db.models import Category, Store, Items, Address, Order, OrderItems
 from werkzeug.utils import secure_filename
+
 
 category = Blueprint("cate", __name__)
 
@@ -220,24 +226,24 @@ def register_items():
     form = ItemsForm()
 
     if form.validate_on_submit():
-        #try:
-        items = create_item(
-            name=form.name.data,
-            price=form.price.data,
-            description=form.description.data,
-            store_id=form.store_id.data.name_store,
-            available=form.available.data,
-        )
-        image = request.files['image']
-        upload_folder = os.path.join(app.config["UPLOAD_FOLDER"])
-        secure_filename(upload_folder)
-        image.save(f'{upload_folder}/{items.id}.jpg')
+        try:
+            items = create_item(
+                name=form.name.data,
+                price=form.price.data,
+                description=form.description.data,
+                store_id=form.store_id.data.name_store,
+                available=form.available.data,
+            )
+            image = request.files['image']
+            upload_folder = os.path.join(app.config["UPLOAD_FOLDER"])
+            secure_filename(upload_folder)
+            image.save(f'{upload_folder}/{items.id}.jpg')
 
-        flash('Item registrado com sucesso!', 'success')
-        return redirect(url_for('.register_items'))
-        #except Exception:
-            #flash('Houve algum erro ao cadastrar o item!', 'danger')
-            #return redirect(url_for('.register_items'))
+            flash('Item registrado com sucesso!', 'success')
+            return redirect(url_for('.register_items'))
+        except Exception:
+            flash('Houve algum erro ao cadastrar o item!', 'danger')
+            return redirect(url_for('.register_items'))
 
     return render_template("items/register_items.html", form=form)
 
