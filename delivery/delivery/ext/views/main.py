@@ -68,12 +68,18 @@ def logout():
     logout_user()
     return redirect(url_for("main.login"))
 
-@main.route('/foods/<id>', methods=['GET', ])
+@main.route('/alimento/<id>', methods=['GET', ])
 def foods(id):
     items = Items.query.filter_by(id=id).first()
     nome_arquivo = list_image(id)
 
     return render_template('order/foods.html', items=items, capa_item=nome_arquivo)
+
+@main.route('/carrinho', methods=['GET', 'POST'])
+def cart():
+    items = Items.query.all()
+
+    return render_template('order/cart.html', items=items)
 
 @main.route("/restaurantes")
 def restaurants():

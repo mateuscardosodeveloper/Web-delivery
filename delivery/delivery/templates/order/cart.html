@@ -1,0 +1,78 @@
+{% extends "index.html" %}
+
+{% block top %}
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <p class="subtitle">Carrinho</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block main %}
+<div class="columns">
+    <div class="column is-three-fifths">
+        <p class="title is-10">Carrinho de Compras</p>
+
+        <div class="card-content">
+            <div class="media">
+
+                <div class="media-left">
+                    <figure class="image is-96x96">
+                        <img src="https://bulma.io/images/placeholders/128x128.png">
+                    </figure>
+                </div>
+
+                <div class="media-content">
+                    Nome do alimento
+                </div>
+
+                <div class="media-content" style="text-align: start">
+                    R$
+                </div>
+
+                <div class="media-content" style="text-align: start">
+                    <button class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+                
+                <div class="media-content" style="text-align: start;">
+                    <a href="">
+                        <button class="button is-white">
+                            <img src="../../static/trash.svg">
+                        </button>
+                    </a>
+                    
+                </div>
+
+            </div>
+        </div>
+
+        </br>
+        <div class="card">
+        </div>
+        </br>
+    </div>
+
+    <div class="column">
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <p class="subtitle is-4">Total de () Items</p>
+            </div>
+        </div>
+
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <a class="card text-center" href="">
+                    <button class="button is-dark">Continuar com a Compra</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
