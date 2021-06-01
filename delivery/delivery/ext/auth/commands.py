@@ -38,30 +38,40 @@ def add_category(name, on_menu):
 @click.option("--name_store", "-s")
 @click.option("--user_id", "-s")
 @click.option("--category_id", "-s")
-@click.option("--active", "-a", is_flag=True, default=False)
+@click.option("--active", "-a", is_flag=True, default=True)
 def add_store(name_store, user_id, category_id, active):
     """Adicionar nova Loja"""
-    create_store(
-        name_store=name_store,
-        user_id=user_id,
-        category_id=category_id,
-        active=active
-    )
+    try:
+        create_store(
+            name_store=name_store,
+            user_id=user_id,
+            category_id=category_id,
+            active=active
+        )
+    except Exception:
+        click.echo("Loja já existe!")
 
     click.echo(f"Loja {name_store} criada com sucesso!")
 
 @click.option("--name", "-s")
 @click.option("--price", "--pos")
+@click.option("--quantity", "--pos")
+@click.option("--description", "-s")
 @click.option("--store_id", "-s")
 @click.option("--available", "-a", is_flag=True, default=True)
-def add_item(name, price, store_id, available):
+def add_item(name, price, quantity, description, store_id, available):
     """Adicionar novo item"""
-    create_item(
-        name=name,
-        price=price,
-        store_id=store_id,
-        available=available,
-    )
+    try:
+        create_item(
+            name=name,
+            price=price,
+            quantity=quantity,
+            description=description,
+            store_id=store_id,
+            available=available,
+        )
+    except Exception:
+        click.echo("Item já existe!")
 
     click.echo(f"Item {name} criado com sucesso!")
 
