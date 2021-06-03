@@ -28,7 +28,7 @@ format:
 run:
 	FLASK_APP=delivery/app.py FLASK_ENV=development flask run
 
-create_categorys:
+create_categories:
 	FLASK_APP=delivery/app.py 
 	flask add-category --name=Sorveteria
 	flask add-category --name=Lanche
