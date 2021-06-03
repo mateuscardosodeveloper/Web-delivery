@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, send_from_directory
 from flask import current_app as app
-from delivery.ext.db.models import Items
+from delivery.ext.db.models import Items, Store
 from delivery.ext.auth.controller import list_image
 
 page = Blueprint("page", __name__)
@@ -13,13 +13,32 @@ def upload_file(file):
 
 @page.route("/", methods=["GET"])
 def index():
-    item = Items.query.all()
-    return render_template("index.html", item=item)
+    store = Store.query.all()
+    return render_template("index.html", store=store)
 
 
-@page.route("/restaurantes")
+@page.route("/restaurantes", methods=["GET"])
 def restaurants():
-    return render_template("restaurants.html")
+    store = Store.query.all()
+    return render_template("restaurants.html", store=store)
+
+@page.route("/sorveteria", methods=["GET"])
+def sorveteria():
+    item = Items.query.all()
+    store = Store.query.all()
+    return render_template("sorveteria.html", item=item, store=store)
+
+@page.route("/lanches", methods=["GET"])
+def lanches():
+    item = Items.query.all()
+    store = Store.query.all()
+    return render_template("lanches.html", item=item, store=store)
+
+@page.route("/pasteis", methods=["GET"])
+def pasteis():
+    item = Items.query.all()
+    store = Store.query.all()
+    return render_template("pasteis.html", item=item, store=store)
 
 
 @page.route("/sobre")

@@ -1,5 +1,9 @@
-{% macro cards(items) %}
+{% macro cards(items, stores) %}
+
+{% for store in stores %}
 {% for item in items %}
+{% if store.category_id == 'Pastelaria' %}
+{% if item.store_id == store.name_store %}
 
 <div class="column is-one-quarter">
     <a href="{{url_for('main.foods', id=item.id)}}">
@@ -9,10 +13,6 @@
                 <figure class="image is-4by3">
                     <img src="{{url_for('page.upload_file', file=item.id).join(['', '.jpg'])}}" alt="Placeholder image">
                 </figure>
-                <div class="media-content">
-                    <p class="title is-4">John Smith</p>
-                    <p class="subtitle is-6">@johnsmith</p>
-                  </div>
             </div>
 
             <div class="card-content">
@@ -30,6 +30,8 @@
         </div>
     </a>
 </div>
-
+{% endif %}
+{% endif %}
+{% endfor %}
 {% endfor %}
 {% endmacro%}

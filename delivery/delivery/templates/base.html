@@ -51,14 +51,14 @@
           </a>
 
           <div class="navbar-dropdown">
-            <a class="navbar-item">
-              Pizza
+            <a class="navbar-item" href="{{url_for('page.sorveteria')}}">
+              Sorvetes
             </a>
-            <a class="navbar-item">
-              Pastel
+            <a class="navbar-item" href="{{url_for('page.lanches')}}">
+              Lanches
             </a>
-            <a class="navbar-item">
-              hamburguer
+            <a class="navbar-item" href="{{url_for('page.pasteis')}}">
+              Pasteis
             </a>
             <hr class="navbar-divider">
             <a class="navbar-item">
@@ -83,9 +83,6 @@
             <a class="navbar-item" href="{{ url_for('cate.list_items') }}">
               Item
             </a>
-            <a class="navbar-item" href="{{ url_for('cate.list_address') }}">
-              Endereço
-            </a>
             <a class="navbar-item" href="{{ url_for('cate.list_order') }}">
               Compra
             </a>
@@ -103,7 +100,7 @@
 
       <div class="navbar-end">
         <div class="navbar-item">
-          <a class="button is-primary" href="">
+          <a class="button is-primary" href="{{url_for('main.cart')}}">
             <span class="icon-text">
               <i class="fas fa-utensils"></i>
               <strong>CART</strong>

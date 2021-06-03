@@ -64,6 +64,20 @@
             </div>
 
             <div class="form-group">
+                <label>Quantidade</label>
+                {{form.quantity(class="input", type="number", placeholder="Quantidade")}}
+                {% if form.errors.quantity %}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        {% for e in form.errors.quantity %}
+                        <li>{{ e }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
                 <label>Descrição </label>
                 {{ form.description(class="textarea", placeholder="Descrição") }}
                 {% if form.errors.description %}

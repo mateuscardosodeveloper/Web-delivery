@@ -80,7 +80,3 @@ def cart():
     items = Items.query.all()
 
     return render_template('order/cart.html', items=items)
-
-@main.route("/restaurantes")
-def restaurants():
-    return render_template("restaurants.html")

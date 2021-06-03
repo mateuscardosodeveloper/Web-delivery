@@ -60,6 +60,20 @@
                     </p>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label>Quantidade</label>
+                {{form.quantity(class="input", type="number", placeholder="Quantidade")}}
+                {% if form.errors.quantity %}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        {% for e in form.errors.quantity %}
+                        <li>{{ e }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
 
             <div class="form-group">
                 <label>Descrição</label>
@@ -95,7 +109,11 @@
         <div class="column is-one-quarter">
             <div class="form-group">
                 <figure class="thumb col-md-9">
-                    <img class="img-responsive" src="{{url_for('page.upload_file', file=capa_item)}}">
+                    {% if not image %}
+                        <img class="img-responsive" src="{{url_for('page.upload_file', file='capa_padrao.jpg')}}">
+                    {% else %}
+                        <img class="img-responsive" src="{{url_for('page.upload_file', file=capa_item)}}">
+                    {% endif %}
                     {{form.image(class="button is-white")}}
                     <figcaption>
                         <label class="fileContainer">

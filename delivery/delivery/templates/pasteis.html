@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% import "macros/list_stores.html" as list_stores %}
+{% import "macros/list_item_pasteis.html" as list_item_pasteis %}
 
 {% block top %}
 <section class="hero is-primary">
@@ -21,6 +21,6 @@
 
 {% block main %}
 <div class="columns">
-    {{ list_stores.cards(store)}}
+    {{ list_item_pasteis.cards(item, store)}}
 </div>
 {% endblock main %}
