@@ -179,6 +179,7 @@ def edit_items(id):
     if form.validate_on_submit():
         items.name = form.name.data
         items.price = form.price.data
+        items.quantity = form.quantity.data
         items.description = form.description.data
         if form.store_id.data == None:
             pass
@@ -203,6 +204,7 @@ def edit_items(id):
 
     form.name.data = items.name
     form.price.data = items.price
+    form.quantity.data = items.quantity
     form.description.data = items.description
     form.store_id.data = items.store_id
     form.available.data = items.available
@@ -230,6 +232,7 @@ def register_items():
             items = create_item(
                 name=form.name.data,
                 price=form.price.data,
+                quantity=form.quantity.data,
                 description=form.description.data,
                 store_id=form.store_id.data.name_store,
                 available=form.available.data,
