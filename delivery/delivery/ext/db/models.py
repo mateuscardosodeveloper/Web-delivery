@@ -63,7 +63,7 @@ class Items(db.Model):
     __tablename__ = "items"
     id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.Unicode)
-    image = db.Column("image", db.Unicode)
+    quantity = db.Column("quantity", db.Integer)
     price = db.Column("price", db.Float(asdecimal=True, decimal_return_scale=2))
     description = db.Column("description", db.Text(length=None))
     store_id = db.Column("store_id", db.Integer, db.ForeignKey("store.name_store"))
@@ -82,9 +82,12 @@ class Order(db.Model):
     completed = db.Column("completed", db.Boolean)
     user_id = db.Column("user_id", db.Integer, db.ForeignKey("user.email"))
     store_id = db.Column("store_id", db.Integer, db.ForeignKey("store.name_store"))
+    address_id = db.Column("address_id", db.Integer, db.ForeignKey("address.zip_code"))
     
     user = db.relationship("User", foreign_keys=user_id)
     store = db.relationship("Store", foreign_keys=store_id)
+    address = db.relationship("Address", foreign_keys=address_id)
+
 
     def __repr__(self):
         return f'{self.user_id} {self.created_at}'
