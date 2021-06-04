@@ -2,7 +2,7 @@
 {% for store in stores %}
 
 <div class="column is-one-quarter">
-    <a href="">
+    <a href="{{url_for('main.restaurants_items', id=store.id)}}">
         <div class="card">
 
             <div class="card-image">
