@@ -34,7 +34,7 @@ class StoresForm(FlaskForm):
     name_store = wtf.StringField(
         "Nome da Loja", [wtf.validators.DataRequired()])
     category_id = QuerySelectField(
-        query_factory=lambda: Category.query.all(), allow_blank=False, get_label='name')
+        query_factory=lambda: Category.query.all(), get_label='name')
     active = wtf.BooleanField("Ativo", default=True)
 
 
@@ -42,9 +42,9 @@ class StoreEditForm(FlaskForm):
     name_store = wtf.StringField(
         "Nome da Loja", [wtf.validators.DataRequired()])
     category_id = QuerySelectField(query_factory=lambda: Category.query.all(
-    ), allow_blank=True, get_label='name', blank_text='Selecione uma Categoria')
+    ), get_label='name', blank_text='Selecione uma Categoria')
     user_id = QuerySelectField(query_factory=lambda: User.query.all(
-    ), allow_blank=True, blank_text='Seleciona um usuário')
+    ), blank_text='Seleciona um usuário')
     active = wtf.BooleanField("Ativo")
 
 
@@ -66,7 +66,7 @@ class ItemsEditForm(FlaskForm):
     quantity = wtf.IntegerField("Quantidade", [wtf.validators.DataRequired()])
     description = wtf.TextAreaField("Descrição", [wtf.validators.DataRequired()])
     store_id = QuerySelectField('ID da loja', query_factory=lambda: Store.query.all(
-    ), allow_blank=True, blank_text='Selecione uma loja')
+    ), blank_text='Selecione uma loja')
     available = wtf.BooleanField("Disponivel")
 
 
@@ -91,13 +91,17 @@ class OrderForm(FlaskForm):
     completed = wtf.BooleanField("Comprado")
     store_id = QuerySelectField(
         "ID da Loja", query_factory=lambda: Store.query.all())
+    address_id = QuerySelectField("ID do Endereço", query_factory=lambda: Address.query.all(
+    ), blank_text='Selecione um Endereço')
 
 
 class OrderEditForm(FlaskForm):
     created_at = wtf.StringField("Data e Hora")
     completed = wtf.BooleanField("Comprado")
     store_id = QuerySelectField("ID da Loja", query_factory=lambda: Store.query.all(
-    ), allow_blank=True, blank_text='Selecione uma loja')
+    ), blank_text='Selecione uma loja')
+    address_id = QuerySelectField("ID do Endereço", query_factory=lambda: Address.query.all(
+    ), blank_text='Selecione um Endereço')
 
 
 class OrderItemsForm(FlaskForm):

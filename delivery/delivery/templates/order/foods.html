@@ -62,9 +62,11 @@
 
         <div class="card" style="width: 16rem;">
             <div class="card-body">
-                <a class="card text-center" href="">
+                {% if not address %}
+                <a class="card text-center" href="{{url_for('cate.register_address')}}">
                     <button class="button is-dark"> Adicionar ao carrinho</button>
                 </a>
+                {% endif %}
             </div>
         </div>
     </div>

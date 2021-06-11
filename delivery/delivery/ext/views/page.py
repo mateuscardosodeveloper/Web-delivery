@@ -14,7 +14,8 @@ def upload_file(file):
 @page.route("/", methods=["GET"])
 def index():
     store = Store.query.all()
-    return render_template("index.html", store=store)
+    items = Items.query.all()
+    return render_template("index.html", store=store, items=items)
 
 
 @page.route("/restaurantes", methods=["GET"])

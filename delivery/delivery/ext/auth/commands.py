@@ -8,7 +8,7 @@ from datetime import datetime
 @click.option("--name", "-s")
 @click.option("--email", "-e")
 @click.option("--password", "-p")
-@click.option("--admin", "-a", is_flag=True, default=False)
+@click.option("--admin", "-a", is_flag=True, default=True)
 def add_user(name, email, password, admin):
     """Adicionando novo usuario"""
     try:

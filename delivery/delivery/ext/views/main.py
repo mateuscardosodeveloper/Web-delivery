@@ -78,8 +78,8 @@ def foods_id(id):
 @main.route('/restaurants_items/<id>', methods=['GET',])
 def restaurants_items(id):
     stores = Store.query.filter_by(id=id).first()
-    item = Items.query.all()
-    return render_template('restaurants_items.html', item=item, stores=stores)
+    items = Items.query.all()
+    return render_template('restaurants_items.html', items=items, stores=stores)
 
 @main.route('/carrinho', methods=['GET', 'POST'])
 def cart():

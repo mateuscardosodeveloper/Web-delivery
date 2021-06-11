@@ -12,7 +12,7 @@ from delivery.ext.auth.form import CategoryForm, CategoryEditForm, \
 from delivery.ext.auth.controller import create_category, create_item,\
     create_store, create_address, create_order, save_user_picture, list_image, delete_image
 from delivery.ext.db import db
-from delivery.ext.db.models import Category, Store, Items, Address, Order, OrderItems
+from delivery.ext.db.models import Category, Store, Items, Address, Order, OrderItems, User
 from werkzeug.utils import secure_filename
 
 
@@ -254,7 +254,8 @@ def register_items():
 @category.route('/lista_endereço', methods=['GET', 'POST'])
 @login_required
 def list_address():
-    addresses = Address.query.all()
+    user = User.query.all()
+    addresses = Address.query.filter_by(user=current_user).all()
     return render_template('address/list_address.html', addresses=addresses)
 
 
@@ -377,12 +378,12 @@ def register_order():
         try:
             create_order(
                 created_at=datetime.now(),
-                completed=form.completed.data,
                 user_id=current_user.email,
-                store_id=form.store_id.data.name_store
+                store_id=form.store_id.data.name_store,
+                address_id=form.address_id.data.zip_code,
+                completed=form.completed.data,
             )
-            flash('Ordem de compra registrada com sucesso!', 'success')
-            return redirect(url_for('.register_order'))
+            return redirect(url_for('main.cart'))
         except Exception:
             flash('Algo deu errado tente novamente!', 'warning')
             return redirect(url_for('.register_order'))

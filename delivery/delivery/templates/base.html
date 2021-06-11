@@ -123,10 +123,16 @@
 
         {% if current_user.is_authenticated %}
 
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-light" href="{{url_for('main.logout')}}">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            {{current_user.name}}
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="{{url_for('main.logout')}}">
               Log out
+            </a>
+            <a class="navbar-item" href="{{url_for('cate.list_address')}}">
+              Endereço
             </a>
           </div>
         </div>

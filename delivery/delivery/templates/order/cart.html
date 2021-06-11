@@ -14,7 +14,7 @@
 <div class="columns">
     <div class="column is-three-fifths">
         <p class="title is-10">Carrinho de Compras</p>
-
+        {% for item in items %}
         <div class="card-content">
             <div class="media">
 
@@ -24,37 +24,41 @@
                     </figure>
                 </div>
 
-                <div class="media-content">
-                    Nome do alimento
+                <div class="media-content" style="text-align: left; width: 16rem;">
+                    {{item.name}}
                 </div>
 
-                <div class="media-content" style="text-align: start">
-                    R$
+                <div class="media-content" style="text-align: left; width: 16rem;">
+                    R$ {{item.price}}
                 </div>
 
-                <div class="media-content" style="text-align: start">
-                    <button class="card-header-icon" aria-label="more options">
-                        <span class="icon">
-                            <i class="fas fa-angle-down" aria-hidden="true"></i>
-                        </span>
-                    </button>
+
+                <div class="select is-primary" style="text-align: center; width: 5rem;">
+                    <select>
+                        {% for i in range(10) %}
+                        <option>{{i}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                
-                <div class="media-content" style="text-align: start;">
+
+
+                <div class="media-content" style="text-align: center; width: 16rem;">
                     <a href="">
                         <button class="button is-white">
                             <img src="../../static/trash.svg">
                         </button>
                     </a>
-                    
+
                 </div>
 
             </div>
         </div>
 
+
         </br>
         <div class="card">
         </div>
+        {% endfor %}
         </br>
     </div>
 

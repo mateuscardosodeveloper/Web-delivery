@@ -114,12 +114,13 @@ def create_address(zip_code: str, state: str, city: str, address: str, number_ho
     return address
 
 
-def create_order(created_at: str, completed: bool, user_id: str, store_id: str) -> Order:
+def create_order(created_at: str, user_id: str, store_id: str, address_id: str, completed: bool=False) -> Order:
     order = Order(
         created_at=created_at,
-        completed=completed,
         user_id=user_id,
         store_id=store_id,
+        address_id=address_id,
+        completed=completed,
     )
     db.session.add(order)
     db.session.commit()

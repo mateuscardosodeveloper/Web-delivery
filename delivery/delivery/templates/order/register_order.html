@@ -20,7 +20,7 @@
 
         <div class="form-group">
             <label>Estabelecimento: </label>
-            {{ form.store_id(class="form-control", placeholder="Estabelecimento que comprou") }}
+            {{ form.store_id(class="form-control") }}
             {% if form.errors.name %}
             <div class="alert alert-danger" role="alert">
                 <ul>
@@ -33,21 +33,21 @@
         </div>
 
         <div class="form-group">
-            <label>Comprar agora? </label>
-            {{ form.completed(class="checkbox", type="checkbox") }}
-            {% if form.errors.available %}
+            <label>Endereço: </label>
+            {{ form.address_id(class="form-control") }}
+            {% if form.errors.name %}
             <div class="alert alert-danger" role="alert">
                 <ul>
-                    {% for e in form.errors.available %}
+                    {% for e in form.errors.name %}
                     <li>{{ e }}</li>
                     {% endfor %}
-                </ul>   
+                </ul>
             </div>
             {% endif %}
         </div>
 
         <div class="form-group">
-            <input class="button is-link" type="submit" value="Cadastrar">
+            <input class="button is-link" type="submit" value="Continuar">
         </div>
 
 
