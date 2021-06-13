@@ -1,53 +1,75 @@
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.contrib.sqla import filters
 from flask_admin.actions import action
+from flask_admin import AdminIndexView
+
 from delivery.ext.db.models import User
 from delivery.ext.db import db
-from flask import flash, Markup
 
-##def format_user(self, request, user, *args):
-    ##return user.email.split("@")[0]
+from flask import flash, Markup, redirect, url_for, request
 
-
-class UserAdmin(ModelView):
-      """Interface admin de user"""
+from flask_login import current_user
 
 
-      column_formatters = {
-          #"email": lambda s, r, u, *a: Markup(f'<b>{u.email.split("@")[0]}<b>')          
-      }
+# def format_user(self, request, user, *args):
+# return user.email.split("@")[0]
 
-      column_list = ['email', 'name', 'admin']
-      
-      column_searchable_list = ['email']
 
-      column_filters = [
-          filters.FilterLike(
-              User.email,
-              "Email",
-              options=(("gmail", "Gmail"), ("hotmail", "Hotmail"), ("outlook", "Outlook"))
-          ),
-          'name', 
-          'admin'
-          ]
+class AdminView(ModelView):
 
-      can_edit = False
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.admin
 
-      @action(
-          'togle_admin',
-          'Togle admin status',
-          'Are you sure?'
-      )
-      def toggle_admin_status(self, ids):
-            users = User.query.filter(User.id.in_(ids)).all()
-            for user in users:  
-              user.admin = not user.admin
-            db.session.commit()
-            flash(f"{len(users)}Usuário alterados com sucesso.", "success")
-    
-      @action("send_email", "send Email to all users", "Are you sure?")
-      def send_email(self, ids):
-          users = User.query.filter(User.id.in_(ids)).all()
-          # 1) redirect para um form para escrever a mensagem do email
-          # 2) enviar o email  
-          flash(f"{len(users)} emails enviados com sucesso.", "success")
+
+class HomeAdminView(AdminIndexView):
+
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.admin
+
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('main.login', next=request.url))
+
+
+class UserAdmin(AdminView):
+    """Interface admin de user"""
+
+    column_formatters = {
+        # "email": lambda s, r, u, *a: Markup(f'<b>{u.email.split("@")[0]}<b>')
+    }
+
+    column_list = ['email', 'name', 'admin']
+
+    column_searchable_list = ['email']
+
+    column_filters = [
+        filters.FilterLike(
+            User.email,
+            "Email",
+            options=(("gmail", "Gmail"), ("hotmail", "Hotmail"),
+                     ("outlook", "Outlook"))
+        ),
+        'name',
+        'admin'
+    ]
+
+    can_edit = False
+
+    @action(
+        'togle_admin',
+        'Togle admin status',
+        'Are you sure?'
+    )
+    def toggle_admin_status(self, ids):
+        users = User.query.filter(User.id.in_(ids)).all()
+        for user in users:
+            user.admin = not user.admin
+        db.session.commit()
+        flash(f"{len(users)}Usuário alterados com sucesso.", "success")
+
+    @action("send_email", "send Email to all users", "Are you sure?")
+    def send_email(self, ids):
+        users = User.query.filter(User.id.in_(ids)).all()
+        # 1) redirect para um form para escrever a mensagem do email
+        # 2) enviar o email
+        flash(f"{len(users)} emails enviados com sucesso.", "success")

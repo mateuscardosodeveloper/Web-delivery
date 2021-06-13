@@ -6,6 +6,7 @@ from delivery.ext.db import db
 from delivery.ext.auth.admin import UserAdmin
 from delivery.ext.admin import admin
 from delivery.ext.db.models import User
+from delivery.ext.auth.admin import AdminView
 
 def init_app(app):
     app.cli.command()(list_users)
