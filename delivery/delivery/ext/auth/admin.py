@@ -10,6 +10,9 @@ from flask import flash, Markup, redirect, url_for, request
 
 from flask_login import current_user
 
+from sqlalchemy import event
+from werkzeug.security import generate_password_hash
+
 
 # def format_user(self, request, user, *args):
 # return user.email.split("@")[0]
@@ -33,6 +36,12 @@ class HomeAdminView(AdminIndexView):
 
 class UserAdmin(AdminView):
     """Interface admin de user"""
+
+    @event.listens_for(User.password, 'set', retval=True)
+    def hash_user_password(target, value, oldvalue, initiator):
+        if value != oldvalue:
+            return generate_password_hash(value)
+        return value
 
     column_formatters = {
         # "email": lambda s, r, u, *a: Markup(f'<b>{u.email.split("@")[0]}<b>')
