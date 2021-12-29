@@ -191,8 +191,9 @@ def edit_items(id):
             image = request.files['image']
             upload_folder = os.path.join(app.config["UPLOAD_FOLDER"])
             secure_filename(upload_folder)
-            delete_image(id)
-            image.save(f'{upload_folder}/{items.id}.jpg')
+            if image:
+                delete_image(id)
+                image.save(f'{upload_folder}/{items.id}.jpg')
             db.session.add(items)
             db.session.commit()
             flash('Item editado com sucesso', 'success')
@@ -244,8 +245,8 @@ def register_items():
 
             flash('Item registrado com sucesso!', 'success')
             return redirect(url_for('.register_items'))
-        except Exception:
-            flash('Houve algum erro ao cadastrar o item!', 'danger')
+        except Exception as e:
+            flash(f'Houve algum erro ao cadastrar o item! {e}', 'danger')
             return redirect(url_for('.register_items'))
 
     return render_template("items/register_items.html", form=form)

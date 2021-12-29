@@ -109,7 +109,7 @@
         <div class="column is-one-quarter">
             <div class="form-group">
                 <figure class="thumb col-md-9">
-                    {% if not image %}
+                    {% if not capa_item %}
                         <img class="img-responsive" src="{{url_for('page.upload_file', file='capa_padrao.jpg')}}">
                     {% else %}
                         <img class="img-responsive" src="{{url_for('page.upload_file', file=capa_item)}}">

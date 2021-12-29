@@ -2,7 +2,7 @@ import wtforms as wtf
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
 from delivery.ext.db.models import Store, User, Category, Address, OrderItems, Order, Items
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms_sqlalchemy.fields import QuerySelectField
 
 
 class UserForm(FlaskForm):
@@ -50,7 +50,7 @@ class StoreEditForm(FlaskForm):
 
 class ItemsForm(FlaskForm):
     name = wtf.StringField("Nome", [wtf.validators.DataRequired()])
-    image = wtf.FileField("Image", [wtf.validators.DataRequired()])
+    image = wtf.FileField("Image")
     price = wtf.FloatField("Preço", [wtf.validators.DataRequired()])
     quantity = wtf.IntegerField("Quantidade", [wtf.validators.DataRequired()])
     description = wtf.TextAreaField ("Descrição", [wtf.validators.DataRequired()])

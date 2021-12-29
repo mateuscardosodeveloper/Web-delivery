@@ -135,7 +135,8 @@ def list_image(id):
 
 def delete_image(id):
     arquivo = list_image(id)
-    os.remove(os.path.join(app.config['UPLOAD_FOLDER'], arquivo))
+    if arquivo:
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], arquivo))
 
 
 def save_user_picture(filename, filestore):
